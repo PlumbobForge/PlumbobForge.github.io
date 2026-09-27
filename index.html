@@ -649,7 +649,7 @@
     <header class="site-nav">
         <div class="container nav-inner">
             <a href="#" class="nav-brand">
-                <img class="nav-logo" src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true" alt="PlumbobForge Logo">
+                <img class="nav-logo" src="https://github.com/PlumbobForge/PlumbobForge.Desktop/blob/main/Assets/appicon.svg?raw=true" alt="PlumbobForge Logo">
                 <span>Plumbob<span class="text-emerald">Forge</span></span>
             </a>
 
@@ -657,11 +657,11 @@
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#tools" class="nav-link">Health & Tools</a>
                 <a href="#faq" class="nav-link">FAQ</a>
-                <a href="https://github.com/PlumbobForge/PlumbobForgeApp" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+                <a href="https://github.com/PlumbobForge/PlumbobForge.Desktop" target="_blank" rel="noopener" class="nav-link">GitHub</a>
             </nav>
 
             <div class="nav-cta">
-                <a id="nav-download-btn" href="https://github.com/PlumbobForge/PlumbobForgeApp/releases/latest" class="btn btn-primary btn-sm">
+                <a id="nav-download-btn" href="https://github.com/PlumbobForge/PlumbobForge.Desktop/releases/latest" class="btn btn-primary btn-sm">
                     <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
                     <span>Download</span>
                 </a>
@@ -678,7 +678,7 @@
             <div class="container hero-content">
 
                 <div class="plumbob-container">
-                    <img class="plumbob-gem" src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true" alt="PlumbobForge Plumbob">
+                    <img class="plumbob-gem" src="https://github.com/PlumbobForge/PlumbobForge.Desktop/blob/main/Assets/appicon.svg?raw=true" alt="PlumbobForge Plumbob">
                 </div>
 
                 <h1 class="main-title">
@@ -690,12 +690,12 @@
                 </p>
 
                 <div class="cta-row">
-                    <a id="main-download-btn" href="https://github.com/PlumbobForge/PlumbobForgeApp/releases/latest" class="btn btn-primary">
+                    <a id="main-download-btn" href="https://github.com/PlumbobForge/PlumbobForge.Desktop/releases/latest" class="btn btn-primary">
                         <span class="material-symbols-outlined">download</span>
                         <span id="main-download-text">Download for Windows</span>
                     </a>
 
-                    <a href="https://github.com/PlumbobForge/PlumbobForgeApp" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <a href="https://github.com/PlumbobForge/PlumbobForge.Desktop" target="_blank" rel="noopener" class="btn btn-secondary">
                         <span class="material-symbols-outlined">code</span>
                         <span>View Source Code</span>
                     </a>
@@ -928,13 +928,13 @@
             <div class="footer-inner">
                 <div class="footer-top">
                     <div class="footer-brand">
-                        <img src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true" alt="PlumbobForge Logo" height="24px">
+                        <img src="https://github.com/PlumbobForge/PlumbobForge.Desktop/blob/main/Assets/appicon.svg?raw=true" alt="PlumbobForge Logo" height="24px">
                         <span>Plumbob<span class="text-emerald">Forge</span></span>
                     </div>
 
                     <div class="footer-links">
-                        <a href="https://github.com/PlumbobForge/PlumbobForgeApp" target="_blank" rel="noopener">GitHub</a>
-                        <a href="https://github.com/PlumbobForge/PlumbobForgeApp/releases" target="_blank" rel="noopener">Releases</a>
+                        <a href="https://github.com/PlumbobForge/PlumbobForge.Desktop" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://github.com/PlumbobForge/PlumbobForge.Desktop/releases" target="_blank" rel="noopener">Releases</a>
                         <a href="https://www.tumblr.com/bringscookies/" target="_blank" rel="noopener">Tumblr</a>
                     </div>
                 </div>
@@ -950,11 +950,11 @@
     <!-- Scripts -->
     <script>
       let latestVersion = "v0.3.0";
-      let latestExeUrl = "https://github.com/PlumbobForge/PlumbobForgeApp/releases/latest";
+      let latestExeUrl = "https://github.com/PlumbobForge/PlumbobForge.Desktop/releases/latest";
 
       async function fetchLatestRelease() {
         try {
-          const response = await fetch("https://api.github.com/repos/PlumbobForge/PlumbobForgeApp/releases/latest");
+          const response = await fetch("https://api.github.com/repos/PlumbobForge/PlumbobForge.Desktop/releases/latest");
           if (!response.ok) throw new Error("Failed to fetch release info");
           const data = await response.json();
 
