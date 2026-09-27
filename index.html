@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlumbobForge — Sims 3 CC Manager & Optimizer</title>
+    <title>PlumbobForge</title>
+    <meta name="description" content="Open-source CC manager for The Sims 3. Sort, merge, diagnose, and configure.">
 
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PlumbobForge - CC Manager">
+    <meta property="og:description" content="Sort, merge, diagnose, and configure your The Sims 3 CC.">
+    <meta property="og:image" content="thumbnail.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <style>
@@ -12,27 +21,21 @@
         --primary: #10b981;
         --primary-hover: #059669;
         --primary-light: rgba(16, 185, 129, 0.12);
-        --primary-glow: rgba(16, 185, 129, 0.35);
-        --bg-base: #0c0f14;
-        --bg-surface: #151921;
-        --bg-card: #1a1f2b;
-        --bg-card-hover: #222938;
-        --bg-hover: rgba(255, 255, 255, 0.04);
+        --primary-glow: rgba(16, 185, 129, 0.32);
+        --bg-base: #090c10;
+        --bg-surface: #0f141c;
+        --bg-card: #151b26;
         --border-subtle: rgba(255, 255, 255, 0.08);
-        --border-active: rgba(16, 185, 129, 0.35);
-        --text-main: #e8ecf1;
-        --text-muted: #7a8494;
-        --font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        --border-active: rgba(16, 185, 129, 0.4);
+        --text-main: #f1f5f9;
+        --text-muted: #94a3b8;
+        --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
         --radius-sm: 6px;
         --radius-md: 8px;
         --radius-lg: 12px;
+        --radius-xl: 16px;
         --radius-pill: 9999px;
-        --danger: #ef4444;
-        --danger-light: rgba(239, 68, 68, 0.12);
-        --danger-border: rgba(239, 68, 68, 0.3);
-        --warning: #eab308;
-        --warning-light: rgba(234, 179, 8, 0.12);
-        --warning-border: rgba(234, 179, 8, 0.3);
       }
 
       * {
@@ -41,11 +44,15 @@
         padding: 0;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         background-color: var(--bg-base);
         color: var(--text-main);
         font-family: var(--font-family);
-        line-height: 1.5;
+        line-height: 1.55;
         overflow-x: hidden;
         min-height: 100vh;
         display: flex;
@@ -60,7 +67,7 @@
         background: var(--bg-base);
       }
       ::-webkit-scrollbar-thumb {
-        background: #262c3a;
+        background: #202736;
         border-radius: var(--radius-sm);
       }
       ::-webkit-scrollbar-thumb:hover {
@@ -75,25 +82,84 @@
 
       .container {
         width: 100%;
-        max-width: 1140px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .container-narrow {
-        width: 100%;
-        max-width: 800px;
+        max-width: 1180px;
         margin: 0 auto;
         padding: 0 1.5rem;
       }
 
+      .container-narrow {
+        width: 100%;
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* Navbar */
+      .site-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: rgba(9, 12, 16, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-subtle);
+        height: 64px;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1.125rem;
+        letter-spacing: -0.01em;
+      }
+
+      .nav-logo {
+        height: 28px;
+        filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.75rem;
+      }
+
+      .nav-link {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: #ffffff;
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+      }
+
+      /* Buttons */
       .btn {
         display: inline-flex;
-        items-center: center;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
         border-radius: var(--radius-md);
@@ -101,21 +167,26 @@
         font-weight: 600;
         text-decoration: none;
         cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         border: 1px solid transparent;
         white-space: nowrap;
       }
 
+      .btn-sm {
+        padding: 0.45rem 0.95rem;
+        font-size: 0.8125rem;
+      }
+
       .btn-primary {
         background-color: var(--primary);
-        color: #080a0e;
+        color: #051b11;
         border-color: var(--primary);
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
       }
       .btn-primary:hover {
         background-color: var(--primary-hover);
         border-color: var(--primary-hover);
-        box-shadow: 0 0 20px var(--primary-glow);
-        transform: translateY(-1px);
+        color: #051b11;
       }
 
       .btn-secondary {
@@ -124,26 +195,26 @@
         border-color: var(--border-subtle);
       }
       .btn-secondary:hover {
-        background-color: var(--bg-card);
-        border-color: var(--border-active);
-        transform: translateY(-1px);
+        background-color: #171f2b;
+        border-color: rgba(255, 255, 255, 0.15);
       }
 
+      /* Hero Section */
       .hero-section {
         position: relative;
-        padding: 4rem 0 3.5rem;
+        padding: 4.5rem 0 3.5rem;
         text-align: center;
         overflow: hidden;
       }
 
       .hero-glow {
         position: absolute;
-        top: 20%;
+        top: 15%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 550px;
-        height: 300px;
-        background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(12, 15, 20, 0) 70%);
+        width: 700px;
+        height: 380px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(9, 12, 16, 0) 70%);
         pointer-events: none;
         z-index: 0;
       }
@@ -151,6 +222,9 @@
       .hero-content {
         position: relative;
         z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .plumbob-container {
@@ -160,20 +234,21 @@
       }
 
       .plumbob-gem {
-        height: 88px;
-        animation: floatPlumbob 3.5s ease-in-out infinite alternate;
+        height: 84px;
+        animation: floatPlumbob 4s ease-in-out infinite alternate;
       }
 
       @keyframes floatPlumbob {
-        0% { transform: translateY(0px) rotate(0deg); filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.6)); }
-        100% { transform: translateY(-8px) rotate(3deg); filter: drop-shadow(0 0 28px rgba(16, 185, 129, 0.95)); }
+        0% { transform: translateY(0px) rotate(0deg); filter: drop-shadow(0 0 16px rgba(16, 185, 129, 0.65)); }
+        100% { transform: translateY(-8px) rotate(3deg); filter: drop-shadow(0 0 32px rgba(16, 185, 129, 0.95)); }
       }
 
       .main-title {
-        font-size: 3.25rem;
+        font-size: 3.5rem;
         font-weight: 800;
-        letter-spacing: -0.02em;
-        margin-bottom: 1rem;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+        margin-bottom: 1.25rem;
         color: #ffffff;
       }
 
@@ -182,10 +257,11 @@
       }
 
       .subtitle {
-        font-size: 1.125rem;
+        font-size: 1.1875rem;
         color: var(--text-muted);
-        max-width: 640px;
-        margin: 0 auto 2rem;
+        max-width: 660px;
+        margin: 0 auto 2.25rem;
+        line-height: 1.6;
       }
 
       .cta-row {
@@ -194,100 +270,61 @@
         justify-content: center;
         gap: 1rem;
         flex-wrap: wrap;
-        margin-bottom: 2rem;
       }
 
-      .social-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--border-subtle);
-        max-width: 680px;
+      /* Screenshot Preview Section */
+      .app-preview-section {
+        padding: 1.5rem 0 5rem;
+      }
+
+      .screenshot-container {
+        max-width: 1080px;
+        margin: 0 auto;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+        background-color: var(--bg-surface);
+      }
+
+      .screenshot-img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Sections General */
+      .section-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.75rem;
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        color: var(--text-muted);
+        max-width: 600px;
         margin: 0 auto;
       }
 
-      .app-preview-section {
-        padding: 1rem 0 4rem;
-      }
-
-      .app-window {
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-        overflow: hidden;
-      }
-
-      .card-thumb {
-        height: 100px;
-        background-color: #12151d;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-muted);
-        position: relative;
-        background-size: cover;
-        background-position: center;
-      }
-
-      .card-info {
-        padding: 0.65rem 0.75rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-
-      .card-name {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: #ffffff;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .card-meta {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 0.6875rem;
-        color: var(--text-muted);
-      }
-
+      /* Features Section */
       .features-section {
-        padding: 4rem 0;
+        padding: 5rem 0;
         background-color: var(--bg-surface);
         border-top: 1px solid var(--border-subtle);
         border-bottom: 1px solid var(--border-subtle);
       }
 
-      .section-header {
-        text-align: center;
-        margin-bottom: 3rem;
-      }
-
-      .section-tag {
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--primary);
-        margin-bottom: 0.5rem;
-        display: block;
-      }
-
-      .section-title {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #ffffff;
-      }
-
       .features-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 1.5rem;
       }
 
@@ -295,60 +332,146 @@
         background-color: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
-        padding: 1.5rem;
+        padding: 1.75rem;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .feature-card:hover {
-        border-color: var(--border-active);
-        transform: translateY(-3px);
-        background-color: var(--bg-card-hover);
-        box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+        justify-content: flex-start;
       }
 
       .feature-icon-wrapper {
-        width: 42px;
-        height: 42px;
-        border-radius: var(--radius-md);
-        background-color: var(--primary-light);
-        border: 1px solid var(--border-active);
         color: var(--primary);
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
       }
 
       .feature-title {
-        font-size: 1.125rem;
+        font-size: 1.1875rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.6rem;
+        letter-spacing: -0.01em;
+      }
+
+      .feature-desc {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        line-height: 1.65;
+      }
+
+      /* Status / Hiatus Banner */
+      .status-banner {
+        background: linear-gradient(90deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
+        border-bottom: 1px solid rgba(245, 158, 11, 0.28);
+        padding: 0.75rem 1.5rem;
+        font-size: 0.84rem;
+        color: #fde68a;
+      }
+
+      .status-banner-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.65rem;
+        text-align: center;
+        line-height: 1.5;
+        margin: 0 auto;
+      }
+
+      .status-icon {
+        color: #f59e0b;
+        font-size: 19px;
+        flex-shrink: 0;
+      }
+
+      .status-text strong {
+        font-weight: 700;
+      }
+
+      /* Tools Highlight Section */
+      .tools-section {
+        padding: 5rem 0 0;
+      }
+
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .tool-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+      }
+
+      .tool-icon {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .tool-icon.emerald { color: #10b981; }
+      .tool-icon.blue { color: #3b82f6; }
+      .tool-icon.amber { color: #f59e0b; }
+      .tool-icon.purple { color: #a855f7; }
+
+      .tool-title {
+        font-size: 1.0625rem;
         font-weight: 700;
         color: #ffffff;
         margin-bottom: 0.5rem;
       }
 
-      .feature-desc {
+      .tool-desc {
         font-size: 0.8125rem;
         color: var(--text-muted);
         line-height: 1.6;
-        margin-bottom: 1.25rem;
       }
 
-      .feature-badge-foot {
-        font-size: 0.6875rem;
-        font-weight: 600;
-        font-family: monospace;
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding-top: 0.75rem;
-        border-top: 1px solid var(--border-subtle);
-      }
-
-      .faq-section {
+      /* Migration Section - Simple */
+      .migration-section {
         padding: 4rem 0;
+        background-color: var(--bg-base);
+      }
+
+      .migration-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 2.25rem 2.5rem;
+      }
+
+      .migration-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.01em;
+      }
+
+      .migration-desc {
+        font-size: 0.9375rem;
+        color: var(--text-muted);
+        line-height: 1.65;
+        max-width: 820px;
+      }
+
+      .migration-desc code {
+        background-color: rgba(255, 255, 255, 0.08);
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        color: #e2e8f0;
+        font-size: 0.85em;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        padding: 5rem 0;
+        background-color: var(--bg-surface);
+        border-top: 1px solid var(--border-subtle);
       }
 
       .faq-list {
@@ -377,10 +500,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 1rem;
         transition: background-color 0.2s ease;
       }
       .faq-button:hover {
-        background-color: var(--bg-hover);
+        background-color: rgba(255, 255, 255, 0.04);
       }
 
       .faq-icon {
@@ -390,7 +514,7 @@
 
       .faq-content {
         padding: 0 1.25rem 1.125rem;
-        font-size: 0.8125rem;
+        font-size: 0.875rem;
         color: var(--text-muted);
         line-height: 1.6;
         border-top: 1px solid var(--border-subtle);
@@ -398,65 +522,29 @@
         display: none;
       }
 
+      .faq-content code {
+        background-color: rgba(255, 255, 255, 0.08);
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        color: #e2e8f0;
+      }
+
       .faq-item.open .faq-content {
         display: block;
       }
       .faq-item.open .faq-icon {
         transform: rotate(180deg);
+        color: var(--primary);
       }
 
-      .download-card-section {
-        padding: 3rem 0 5rem;
-      }
-
-      .download-banner {
-        background-color: var(--bg-card);
-        border: 1px solid var(--border-active);
-        border-radius: var(--radius-lg);
-        padding: 2rem;
-        box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.15);
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-
-      .banner-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-
-      .banner-info-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #ffffff;
-      }
-
-      .banner-info-sub {
-        font-size: 0.75rem;
-        color: var(--text-muted);
-      }
-
-      .banner-foot {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 1.25rem;
-        border-top: 1px solid var(--border-subtle);
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        flex-wrap: wrap;
-        gap: 0.75rem;
-      }
-
+      /* Footer */
       footer {
-        background-color: var(--bg-surface);
+        background-color: #07090d;
         border-top: 1px solid var(--border-subtle);
-        padding: 2.5rem 0 1.5rem;
+        padding: 2.5rem 0 2rem;
         margin-top: auto;
-        font-size: 0.75rem;
+        font-size: 0.8125rem;
         color: var(--text-muted);
       }
 
@@ -485,11 +573,12 @@
 
       .footer-links {
         display: flex;
-        gap: 1.25rem;
+        gap: 1.5rem;
       }
       .footer-links a {
         color: var(--text-muted);
         text-decoration: none;
+        transition: color 0.2s ease;
       }
       .footer-links a:hover {
         color: #ffffff;
@@ -503,7 +592,7 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 0.5rem;
-        font-size: 0.6875rem;
+        font-size: 0.75rem;
       }
 
       #toast-container {
@@ -532,34 +621,72 @@
         transition: all 0.3s ease;
       }
 
-      @media (max-width: 768px) {
-        .main-title { font-size: 2.25rem; }
-        .app-body { grid-template-columns: 1fr; }
-        .app-sidebar { display: none; }
-        .banner-top { flex-direction: column; align-items: flex-start; }
+      @media (max-width: 860px) {
+        .main-title { font-size: 2.5rem; }
+        .nav-links { display: none; }
         .btn { width: 100%; }
+        .cta-row .btn { width: auto; }
+      }
+
+      @media (max-width: 480px) {
+        .cta-row .btn { width: 100%; }
       }
     </style>
 </head>
 <body>
 
+    <!-- Notice / Status Banner -->
+    <div class="status-banner">
+        <div class="container status-banner-inner">
+            <span class="material-symbols-outlined status-icon">info</span>
+            <p class="status-text">
+                <strong>Notice:</strong> PlumbobForge development is currently on an indefinite hiatus. The app is not being actively maintained for the foreseeable future, though development may resume at a later date. Thank you for your support!
+            </p>
+        </div>
+    </div>
+
+    <!-- Sticky Nav -->
+    <header class="site-nav">
+        <div class="container nav-inner">
+            <a href="#" class="nav-brand">
+                <img class="nav-logo" src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true" alt="PlumbobForge Logo">
+                <span>Plumbob<span class="text-emerald">Forge</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#tools" class="nav-link">Health & Tools</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="https://github.com/PlumbobForge/PlumbobForgeApp" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+            </nav>
+
+            <div class="nav-cta">
+                <a id="nav-download-btn" href="https://github.com/PlumbobForge/PlumbobForgeApp/releases/latest" class="btn btn-primary btn-sm">
+                    <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                    <span>Download</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
     <div id="toast-container"></div>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero-section">
             <div class="hero-glow"></div>
             <div class="container hero-content">
 
                 <div class="plumbob-container">
-                    <img class="plumbob-gem" src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true">
+                    <img class="plumbob-gem" src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true" alt="PlumbobForge Plumbob">
                 </div>
 
                 <h1 class="main-title">
-                    Plumbob<span class="text-emerald">Forge</span>
+                    The CC Manager<br>for <span class="text-emerald">The Sims 3</span>
                 </h1>
 
                 <p class="subtitle">
-                    Modern, open-source CC manager for The Sims 3<br>Sort, merge, and configure in one place
+                    Sort thousands of packages, merge bundles for blazing-fast game boot times, diagnose conflicts, and switch gameplay configurations in seconds.
                 </p>
 
                 <div class="cta-row">
@@ -577,65 +704,173 @@
             </div>
         </section>
 
+        <!-- Clean Screenshot Preview -->
         <section class="app-preview-section">
             <div class="container">
-                <img src="thumbnail.png" style="height: 500px;border-radius: 4px;">
+                <div class="screenshot-container">
+                    <img src="thumbnail.png" alt="PlumbobForge User Interface" class="screenshot-img">
+                </div>
             </div>
         </section>
 
-        <section class="features-section">
+        <!-- Core Features Section -->
+        <section id="features" class="features-section">
             <div class="container">
 
                 <div class="section-header">
-                    <h2 class="section-title">What can PlumbobForge do for you?</h2>
+                    <h2 class="section-title">Everything you need to manage your CC</h2>
+                    <p class="section-subtitle">Made to help you manage your CC content efficiently.</p>
                 </div>
 
                 <div class="features-grid">
 
+                    <!-- Feature 1: Sets & Organization -->
                     <div class="feature-card">
-                        <div>
-                            <div class="feature-icon-wrapper">
-                                <span class="material-symbols-outlined">search_off</span>
-                            </div>
-                            <h3 class="feature-title">Smart Filters</h3>
-                            <p class="feature-desc">
-                                PlumbobForge lets you automatically filter your CC by their type: hairs, clothes, presets, and more! Making your sortiing job easier than ever.
-                            </p>
+                        <div class="feature-icon-wrapper">
+                            <span class="material-symbols-outlined">folder_special</span>
                         </div>
+                        <h3 class="feature-title">Sets & Organization</h3>
+                        <p class="feature-desc">
+                            Group your CC into sets and nested sub-sets. Toggle entire creator collections or individual packages on and off with instant batch operations and no file-moving hassle.
+                        </p>
                     </div>
 
+                    <!-- Feature 2: Smart Categorization & Filters -->
                     <div class="feature-card">
-                        <div>
-                            <div class="feature-icon-wrapper">
-                                <span class="material-symbols-outlined">compress</span>
-                            </div>
-                            <h3 class="feature-title">Smaller & Merged CC</h3>
-                            <p class="feature-desc">
-                                PlumbobForge compresses and merges your CC for smaller disk space usage and much faster load times in-game.
-                            </p>
+                        <div class="feature-icon-wrapper">
+                            <span class="material-symbols-outlined">filter_alt</span>
                         </div>
+                        <h3 class="feature-title">CAS Filters</h3>
+                        <p class="feature-desc">
+                            Automatic package inspection classifies your CC by CAS parts, Age groups (Toddler to Elder), Gender, Outfit categories, and Buy/Build objects.
+                        </p>
                     </div>
 
+                    <!-- Feature 3: Cache Builder & Compression -->
                     <div class="feature-card">
-                        <div>
-                            <div class="feature-icon-wrapper">
-                                <span class="material-symbols-outlined">published_with_changes</span>
-                            </div>
-                            <h3 class="feature-title">Sets & Configurations</h3>
-                            <p class="feature-desc">
-                                PlumbobForge allows you to organise your CC into sets and configurations. That allows you to turn specific CC on and off with a click.
-                            </p>
+                        <div class="feature-icon-wrapper">
+                            <span class="material-symbols-outlined">speed</span>
                         </div>
+                        <h3 class="feature-title">High-Speed Merging & Cache</h3>
+                        <p class="feature-desc">
+                            PlumbobForge compresses and merges CC into unified dynamic bundles by default. Your game reads unified files directly, significantly slashing the bottlenecks and boot times.
+                        </p>
                     </div>
+
+                    <!-- Feature 4: Configurations -->
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <span class="material-symbols-outlined">tune</span>
+                        </div>
+                        <h3 class="feature-title">Configurations</h3>
+                        <p class="feature-desc">
+                            Create and use multiple profiles for different save files or gameplay eras. Switch active configurations in one click with automatic synchronization to your Mods directory.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5: Retag & Category Editor -->
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <span class="material-symbols-outlined">label</span>
+                        </div>
+                        <h3 class="feature-title">Tags & Categories</h3>
+                        <p class="feature-desc">
+                            Add and edit custom user tags, re-categorize items on the fly. Instant live filtering and search.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6: Quick Jump & Modern UI -->
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <span class="material-symbols-outlined">keyboard_command_key</span>
+                        </div>
+                        <h3 class="feature-title">Quick Jump (Ctrl + K)</h3>
+                        <p class="feature-desc">
+                            A spotlight search feature. Press <kbd>Ctrl+K</kbd> anywhere in the app to jump directly to any CC package, set, configuration, or tool in milliseconds.
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section class="faq-section">
+        <!-- Tools & Diagnostics Section -->
+        <section id="tools" class="tools-section">
+            <div class="container">
+
+                <div class="section-header">
+                    <h2 class="section-title">Built-in Game Maintenance Tools</h2>
+                    <p class="section-subtitle">No need for separate programs. All that you might need is already here.</p>
+                </div>
+
+                <div class="tools-grid">
+
+                    <!-- Tool 1: Cache Cleaner -->
+                    <div class="tool-card">
+                        <div class="tool-icon emerald">
+                            <span class="material-symbols-outlined">delete_sweep</span>
+                        </div>
+                        <h4 class="tool-title">Game Cache Cleaner</h4>
+                        <p class="tool-desc">
+                            Clean bloated Sims 3 cache files with 1 click to prevent gameplay glitches and texture caching corruption. Find out what needs or doesn't need cleaning.
+                        </p>
+                    </div>
+
+                    <!-- Tool 2: Conflict Scanner -->
+                    <div class="tool-card">
+                        <div class="tool-icon blue">
+                            <span class="material-symbols-outlined">shield</span>
+                        </div>
+                        <h4 class="tool-title">Conflict Scanner</h4>
+                        <p class="tool-desc">
+                            Scans your library for conflicting packages. Highlights potential crash sources and conflicts before you start the game.
+                        </p>
+                    </div>
+
+                    <!-- Tool 3: Pattern Fixer -->
+                    <div class="tool-card">
+                        <div class="tool-icon amber">
+                            <span class="material-symbols-outlined">build_circle</span>
+                        </div>
+                        <h4 class="tool-title">Pattern Material Fixer</h4>
+                        <p class="tool-desc">
+                            Detects and repairs material strings in custom patterns. Eliminates the infinite freeze in Create-a-Style.
+                        </p>
+                    </div>
+
+                    <!-- Tool 4: Collection Creator -->
+                    <div class="tool-card">
+                        <div class="tool-icon purple">
+                            <span class="material-symbols-outlined">category</span>
+                        </div>
+                        <h4 class="tool-title">Collection Creator</h4>
+                        <p class="tool-desc">
+                            Create and customize in-game Buy/Build collections directly from your CC sets. Assign custom category icons and optionally hide objects from the general catalogs.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Migration Section - Simplified -->
+        <section id="migration" class="migration-section">
+            <div class="container">
+                <div class="migration-card">
+                    <h3 class="migration-title">Already using CC Magic or S3MO?</h3>
+                    <p class="migration-desc">
+                        PlumbobForge has a 1-click migration tool in the settings that can copy over your existing CC Magic or Sims 3 Mod Organizer setups. Preserving all your sets, configurations, and packages with no manual work required.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
             <div class="container-narrow">
 
                 <div class="section-header">
-                    <span class="section-tag">Information</span>
                     <h2 class="section-title">Frequently Asked Questions</h2>
                 </div>
 
@@ -643,31 +878,31 @@
 
                     <div class="faq-item">
                         <button onclick="toggleFaq(this)" class="faq-button">
-                            <span>Is PlumbobForge compatible with 1.69 or 1.67?</span>
+                            <span>Is PlumbobForge compatible with Patch 1.69, 1.67, EA App, or Steam?</span>
                             <span class="material-symbols-outlined faq-icon">expand_more</span>
                         </button>
                         <div class="faq-content">
-                            PlumbobForge only operates directly on your package files inside your Documents directory (<code>Documents/Electronic Arts/The Sims 3/Mods</code>). It is 100% compatible with patch 1.67, 1.69, EA App, Steam, and original physical disc installations.
+                            Yes, 100%! PlumbobForge operates directly on standard package files inside your Documents directory (<code>Documents/Electronic Arts/The Sims 3/Mods</code>). It is completely compatible with patch 1.67, 1.69, EA App, Steam, and original physical disc installations.
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button onclick="toggleFaq(this)" class="faq-button">
-                            <span>How does merging packages make my game load faster?</span>
+                            <span>How does merging packages make The Sims 3 load faster?</span>
                             <span class="material-symbols-outlined faq-icon">expand_more</span>
                         </button>
                         <div class="faq-content">
-                            The 32-bit Sims 3 engine opens an OS file handle for every single package file. Having thousands of loose files leads to excessive disk lookup calls and severe startup delay. Merging 500 small packages into 1 big package reduces operating system overhead by up to 99%.
+                            The 32-bit Sims 3 engine opens an OS file handle for every individual <code>.package</code> file. When you have thousands of loose CC files, disk I/O bottlenecks and file handle limits cause severe stutter and multi-minute loading freezes. Merging hundreds of items into unified bundles reduces operating system overhead by up to 90%, letting the engine read data in bulk.
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button onclick="toggleFaq(this)" class="faq-button">
-                            <span>Can I safely un-merge packages if I don't want them merged anymore?</span>
+                            <span>Can I safely find or un-merge my original files?</span>
                             <span class="material-symbols-outlined faq-icon">expand_more</span>
                         </button>
                         <div class="faq-content">
-                            No need to un-merge. PlumbobForge keeps all of your original files in its own Library folder. You can easily find and move your un-merged CC any time you want.
+                            No un-merging is needed! PlumbobForge uses a non-destructive architecture: all your original packages remain safely preserved in your central Library folder. You can easily click "Show in Folder", retag, or move any original CC item at any time.
                         </div>
                     </div>
 
@@ -677,7 +912,7 @@
                             <span class="material-symbols-outlined faq-icon">expand_more</span>
                         </button>
                         <div class="faq-content">
-                            PlumbobForge is 100% free and open-source software released under the GPLv3 license. There's no ads or invasive tracking.
+                            PlumbobForge is 100% free and open-source software licensed under the GNU General Public License v3 (GPLv3). There are no ads, telemetry, or paywalls.
                         </div>
                     </div>
 
@@ -687,25 +922,34 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-inner">
                 <div class="footer-top">
                     <div class="footer-brand">
-                        <img src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true" alt="PlumbobForge" height="24px" class="footer-logo">
+                        <img src="https://github.com/PlumbobForge/PlumbobForgeApp/blob/main/public/logo.png?raw=true" alt="PlumbobForge Logo" height="24px">
                         <span>Plumbob<span class="text-emerald">Forge</span></span>
                     </div>
 
                     <div class="footer-links">
-                        <a href="https://www.tumblr.com/bringscookies/" target="_blank">Tumblr</a>
-                        <a href="https://github.com/PlumbobForge/PlumbobForgeApp" target="_blank">GitHub</a>
+                        <a href="https://github.com/PlumbobForge/PlumbobForgeApp" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://github.com/PlumbobForge/PlumbobForgeApp/releases" target="_blank" rel="noopener">Releases</a>
+                        <a href="https://www.tumblr.com/bringscookies/" target="_blank" rel="noopener">Tumblr</a>
                     </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <span>Released under the GNU General Public License v3.0.</span>
+                    <span>The Sims 3 is a trademark of Electronic Arts Inc. PlumbobForge is not affiliated with or endorsed by EA.</span>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
+      let latestVersion = "v0.3.0";
       let latestExeUrl = "https://github.com/PlumbobForge/PlumbobForgeApp/releases/latest";
 
       async function fetchLatestRelease() {
@@ -739,24 +983,14 @@
         const mainText = document.getElementById('main-download-text');
         if (mainText) mainText.textContent = `Download (${latestVersion}) for Windows`;
 
-        const ctaBtn = document.getElementById('cta-download-btn');
-        if (ctaBtn) ctaBtn.href = latestExeUrl;
-
-        const ctaText = document.getElementById('cta-download-text');
-        if (ctaText) ctaText.textContent = `Download (${latestVersion}) for Windows`;
-
-        const pillText = document.getElementById('version-pill-text');
-        if (pillText) pillText.textContent = `PlumbobForge ${latestVersion} • Free & Open Source`;
-
-        const ctaTitle = document.getElementById('cta-version-title');
-        if (ctaTitle) ctaTitle.textContent = `PlumbobForge ${latestVersion}`;
+        const navBtn = document.getElementById('nav-download-btn');
+        if (navBtn) navBtn.href = latestExeUrl;
       }
 
       function toggleFaq(button) {
         const item = button.closest('.faq-item');
         item.classList.toggle('open');
       }
-
 
       function showToast(message) {
         const container = document.getElementById('toast-container');
